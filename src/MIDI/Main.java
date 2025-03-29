@@ -6,7 +6,9 @@ public class Main {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-
+		List<MidiEventData> midiEvents = MidiCsvParser.parse("src/MIDI/mystery_song.csv");
+		//Testing if parsed correctly.
+		System.out.println(midiEvents.get(710).getNoteOnOff());
 	}
 
 }
