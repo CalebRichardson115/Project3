@@ -23,10 +23,10 @@ public class MidiCsvParser {
 				int startEndTick = Integer.valueOf(midiElements[0]);
 				int noteOnOff;
 				//Need to fix the conditionals but otherwise should be fine.
-				if(midiElements[1] == "Note_on_c") {
+				if(midiElements[1].equals(" Note_on_c")) {
 					noteOnOff = 1;
 				}
-				else if(midiElements[1] == "Note_off_c") {
+				else if(midiElements[1].equals(" Note_off_c")) {
 					noteOnOff = 0;
 				}
 				else {
