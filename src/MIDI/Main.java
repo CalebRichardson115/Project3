@@ -19,11 +19,10 @@ public class Main {
 			Track track = sequence.createTrack();
 			
 			//Unexpected behavior where the grand piano plays on top of the instrument.
-			InstrumentStrategy instrumentStrategy = new TrumpetStrategy();
+			InstrumentStrategy instrumentStrategy = new ElectricBaseGuitarStrategy();
 			instrumentStrategy.applyInstrument(track, 0);
-			//instrumentStrategy = new TrumpetStrategy();
+			instrumentStrategy = new TrumpetStrategy();
 			instrumentStrategy.applyInstrument(track, 1);
-			//instrumentStrategy.applyInstrument(track, 2);
 			
 			//Trying to get the track to play without messing with other classes at the moment.
 			for(MidiEventData event : midiEvents) {
