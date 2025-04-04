@@ -1,4 +1,4 @@
-package InstrumentStrategy;
+package instrumentStrategy;
 
 import javax.sound.midi.*;
 /*Changes the instrument for a channel to Electric Base Guitar at tick 0.

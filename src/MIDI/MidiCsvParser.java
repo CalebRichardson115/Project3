@@ -1,4 +1,4 @@
-package MIDI;
+package midi;
 import java.util.*;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -29,9 +29,11 @@ public class MidiCsvParser {
 				else if(midiElements[1].equals(" Note_off_c")) {
 					noteOnOff = 0;
 				}
+				//Need to throw an exception here
 				else {
 					noteOnOff = -1;
 				}
+				//Retrieves the specific data from each line and puts them into variables that align with the structure of a MidiEventData object.
 				int channel = Integer.valueOf(midiElements[2]);
 				int note = Integer.valueOf(midiElements[3]);
 				int velocity = Integer.valueOf(midiElements[4]);
@@ -40,6 +42,7 @@ public class MidiCsvParser {
 				MidiEventData event = new MidiEventData(channel, note, startEndTick, velocity, instrument, noteOnOff);
 				events.add(event);
 			}
+			//Exception is caught when the provided file is not found or otherwise accessible.
 		} catch(FileNotFoundException e) {
 			System.out.println("Error in reading file.");
 		}

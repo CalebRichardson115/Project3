@@ -1,4 +1,4 @@
-package InstrumentStrategy;
+package instrumentStrategy;
 
 import javax.sound.midi.*;
 import javax.sound.midi.ShortMessage;
@@ -8,10 +8,9 @@ public class TrumpetStrategy implements InstrumentStrategy {
 		try {
 			ShortMessage newInstrument = new ShortMessage();
 			//Uses 56 for the midi number for a trumpet.
-			//Need the last argument to apply at tick 0 correctly.
 			newInstrument.setMessage(ShortMessage.PROGRAM_CHANGE, channel, 56, 0);
 			MidiEvent event = new MidiEvent(newInstrument, 0);
-			//Should make the channel into a trumpet for the duration of the song.
+			//Makes the channel into a trumpet for the duration of the song.
 			track.add(event);
 		} catch(Exception e) {
 			e.printStackTrace();

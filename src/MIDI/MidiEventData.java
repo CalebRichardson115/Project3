@@ -1,4 +1,4 @@
-package MIDI;
+package midi;
 
 public class MidiEventData {
 	//Provided code from the project specifications.

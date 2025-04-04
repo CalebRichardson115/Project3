@@ -1,19 +1,25 @@
-package MIDI;
+package midi;
 import java.util.*;
-import InstrumentStrategy.*;
+
 //Have to require java.dekstop under module info for this to be accessible.
 import javax.sound.midi.*;
 import javax.sound.midi.ShortMessage;
+
+import instrumentStrategy.*;
 
 
 /*
  * MY GUESS:
  * This sounds almost uncanny to Billie Eillish's song "Bad Guy"
- */
+ *
+ *  Main function is provided from the project specifications.
+ *  Parses a provided csv file into a list before adding midi events to a track.
+*/
 public class Main {
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		
 		try {
+			//midiEvents is used to generate events for the track that is to be played.
 			List<MidiEventData> midiEvents = MidiCsvParser.parse("src/MIDI/mystery_song.csv");
 			Sequence sequence = new Sequence(Sequence.PPQ, 384);
 			Track track = sequence.createTrack();
@@ -40,9 +46,8 @@ public class Main {
 					MidiEvent trackEvent = new MidiEvent(noteOff, event.getStartEndTick());
 					track.add(trackEvent);
 				}
-			}
-			
-			
+			}		
+			//Sequencer starts playing the song. Code is provided directly from the project specifications.
 			Sequencer sequencer = MidiSystem.getSequencer();
 			sequencer.open();
 			sequencer.setSequence(sequence);

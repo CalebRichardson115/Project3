@@ -1,4 +1,4 @@
-package PitchStrategy;
+package pitchStrategy;
 //Adds 2 to the note to raise the pitch.
 public class HigherPitchStrategy implements PitchStrategy {
 	public int modifyPitch(int note) {

@@ -1,4 +1,4 @@
-package InstrumentStrategy;
+package instrumentStrategy;
 
 import javax.sound.midi.*;
 import javax.sound.midi.ShortMessage;
@@ -11,7 +11,7 @@ public class ElectricBaseGuitarStrategy implements InstrumentStrategy {
 			//Uses 33 for the Midi electric base guitar number. 
 			newInstrument.setMessage(ShortMessage.PROGRAM_CHANGE, channel, 33, 0);
 			MidiEvent event = new MidiEvent(newInstrument, 0);
-			//Should make the channel into an electric base guitar for the duration of the song.
+			//Makes the channel into an electric base guitar for the duration of the song.
 			track.add(event);
 		} catch(Exception e) {
 			e.printStackTrace();

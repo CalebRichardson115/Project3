@@ -1,4 +1,4 @@
-package PitchStrategy;
+package pitchStrategy;
 /*
  * Implemented strategies will alter the pitch of the song by adding or subtracting from
  * a given note. However, investigating the note range online reveals it to be 0-127.

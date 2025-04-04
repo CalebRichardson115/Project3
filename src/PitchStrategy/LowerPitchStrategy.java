@@ -1,4 +1,4 @@
-package PitchStrategy;
+package pitchStrategy;
 //Subtracts a given note by 2 to lower the pitch.
 public class LowerPitchStrategy implements PitchStrategy {
 	public int modifyPitch(int note) {
