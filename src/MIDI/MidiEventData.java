@@ -9,7 +9,7 @@ public class MidiEventData {
 	private int velocity;
 	private int noteOnOff;
 	private int instrument;
-	
+	//Constructor for MidiEventData
 	public MidiEventData(int channel, int note, int startEndTick, int velocity, int instrument, int noteOnOff) {
 		this.channel = channel;
 		this.note = note;

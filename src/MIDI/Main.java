@@ -3,9 +3,10 @@ import java.util.*;
 
 //Have to require java.dekstop under module info for this to be accessible.
 import javax.sound.midi.*;
-import javax.sound.midi.ShortMessage;
 
 import instrumentStrategy.*;
+import pitchStrategy.*;
+import eventFactory.*;
 
 
 /*
@@ -24,27 +25,35 @@ public class Main {
 			Sequence sequence = new Sequence(Sequence.PPQ, 384);
 			Track track = sequence.createTrack();
 			
-			//Unexpected behavior where the grand piano plays on top of the instrument.
+			
+			//Choose a factory.
+			//MidiEventFactoryAbstract factoryAbstract = new StaccatoMidiEventFactoryAbstract();
+			//MidiEventFactoryAbstract factoryAbstract = new LegatoMidiEventFactoryAbstract();
+			MidiEventFactoryAbstract factoryAbstract = new StandardMidiEventFactoryAbstract();
+			MidiEventFactory factory = factoryAbstract.createFactory();
+			
+			//Choose an instrument strategy.
 			InstrumentStrategy instrumentStrategy = new ElectricBaseGuitarStrategy();
 			instrumentStrategy.applyInstrument(track, 0);
 			instrumentStrategy = new TrumpetStrategy();
 			instrumentStrategy.applyInstrument(track, 1);
 			
+			//Choose a pitch strategy
+			PitchStrategy pitchStrategy = new HigherPitchStrategy();
+			//PitchStrategy pitchStrategy = new LowerPitchStrategy();
+			
 			//Trying to get the track to play without messing with other classes at the moment.
 			for(MidiEventData event : midiEvents) {
+				int modifiedNote = pitchStrategy.modifyPitch(event.getNote());
+				//Can call more times to get higher/lower pitch
+				modifiedNote = pitchStrategy.modifyPitch(modifiedNote);
+				
+				//Same statement as the provided main.
 				if(event.getNoteOnOff() == 1) {
-					ShortMessage noteOn = new ShortMessage();
-					//Assuming the order of arguments based on what javadoc says and mixing it with what the main in 
-					noteOn.setMessage(ShortMessage.NOTE_ON, event.getChannel(), event.getNote(), event.getVelocity());
-					MidiEvent trackEvent = new MidiEvent(noteOn, event.getStartEndTick());
-					track.add(trackEvent);
+					track.add(factory.createNoteOn(event.getStartEndTick(), modifiedNote, event.getVelocity(), event.getChannel()));
 				}
 				else {
-					ShortMessage noteOff = new ShortMessage();
-					//Assuming that the arguments are note_on, channel, note, and velocity by trial.
-					noteOff.setMessage(ShortMessage.NOTE_OFF, event.getChannel(), event.getNote(), event.getVelocity());
-					MidiEvent trackEvent = new MidiEvent(noteOff, event.getStartEndTick());
-					track.add(trackEvent);
+					track.add(factory.createNoteOff(event.getStartEndTick(), modifiedNote, event.getVelocity(), event.getChannel()));
 				}
 			}		
 			//Sequencer starts playing the song. Code is provided directly from the project specifications.

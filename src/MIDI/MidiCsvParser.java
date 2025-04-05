@@ -4,7 +4,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-
+//Parses a csv file into a list of MidiEventData objects.
 public class MidiCsvParser {
 	//Needs to be static due to project specifications for Main.
 	public static List<MidiEventData> parse(String csvFilePath) {
@@ -26,12 +26,8 @@ public class MidiCsvParser {
 				if(midiElements[1].equals(" Note_on_c")) {
 					noteOnOff = 1;
 				}
-				else if(midiElements[1].equals(" Note_off_c")) {
-					noteOnOff = 0;
-				}
-				//Need to throw an exception here
 				else {
-					noteOnOff = -1;
+					noteOnOff = 0;
 				}
 				//Retrieves the specific data from each line and puts them into variables that align with the structure of a MidiEventData object.
 				int channel = Integer.valueOf(midiElements[2]);
